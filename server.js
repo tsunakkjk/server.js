@@ -1,11 +1,33 @@
-const express = require("express");
-const caminho = require("path");
+const express = require('express');
+const path = require('path');
 
 const app = express();
-const porta = 3000;
+const PORT = 3000;
 
-app.use(express.static("public"));
+// Servir arquivos estáticos (HTML, CSS, imagens) da pasta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/", (req, res) => {
-    res.sendFile(caminho.join(__dirname,"public","my_drugs.html"));
+
+
+// Rotas personalizadas (opcional)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+app.get('/fatores', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'fatores.html'));
+});
+
+app.get('/exemplos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'exemplos.html'));
+});
+
+app.get('/quiz', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'questoes.html'));
+});
+
+// Iniciar servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+
